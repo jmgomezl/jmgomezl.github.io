@@ -134,6 +134,74 @@
         .crypto-ticker li {
             margin: 5px 0;
         }
+        * Blockchain Demo Styling */
+        .blockchain-intro {
+            color: #ffffff;
+            margin: 2em 0;
+        }
+
+        .blockchain-demo {
+            margin-top: 2em;
+            background: #2c2c54;
+            padding: 2em;
+            border-radius: 8px;
+        }
+
+        .blockchain-demo h2 {
+            color: #6cb4ee;
+            margin-bottom: 1em;
+        }
+
+        .blockchain-demo .form-input {
+            margin-bottom: 1em;
+        }
+
+        .blockchain-demo .block {
+            background: #f7f7f7;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .blockchain-demo .block:before {
+            content: 'Block';
+            position: absolute;
+            top: -1em;
+            left: 10px;
+            background: #6cb4ee;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .blockchain-demo .block .data {
+            font-weight: bold;
+        }
+
+        .blockchain-demo button {
+            background: #6cb4ee;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .blockchain-demo button:hover {
+            background-color: #5a9fce;
+        }
+
+        /* Add responsiveness */
+        @media (max-width: 768px) {
+            .blockchain-demo {
+                padding: 1em;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -243,6 +311,19 @@
 
     </div>
 
+    <div class="blockchain-demo">
+        <div class="blockchain-intro">
+            <p>Explore the basics of blockchain technology with this interactive demonstration. Add blocks to the chain and see how blockchain keeps data secure and immutable.</p>
+        </div>
+        <h2>Interactive Blockchain Demonstration</h2>
+        <form id="blockchainForm">
+            <input class="form-input" type="text" id="blockData" placeholder="Enter data for the new block" required />
+            <button type="submit">Add to Chain</button>
+        </form>
+        <div id="blockchain"></div>
+    </div>
+    
+
    <!-- Add to the end of your body tag -->
     <div id="crypto-ticker" class="crypto-ticker">
         <h3>Cryptocurrency Prices</h3>
@@ -257,13 +338,13 @@
     </footer>
 
     <!-- Chatbot Button -->
-<button id="chatbotButton" class="open-modal">Chat with AI</button>
+<button id="chatbotButton" class="open-modal">Email me</button>
 
 <!-- Chatbot Modal -->
 <div id="chatbotModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeModal('chatbotModal')">&times;</span>
-        <h2>Chat with AI Bot</h2>
+        <h2>Email me</h2>
         <div id="chatbot">
             <!-- Chat content will go here -->
         </div>
@@ -364,6 +445,66 @@ document.getElementById('chatInput').addEventListener('keypress', function(e) {
         sendMessage();
     }
 });
+
+let blockchain = [];
+
+    // Function to hash block data
+    async function hashBlockData(data) {
+        const encoder = new TextEncoder();
+        const dataBuffer = encoder.encode(data);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Function to create a new block in the blockchain
+    async function createBlock(previousHash, blockData) {
+        const blockContents = JSON.stringify({ data: blockData, prevHash: previousHash });
+        return await hashBlockData(blockContents);
+    }
+
+    // Visualize the blockchain on the page
+    function visualizeBlockchain() {
+        const blockchainContainer = document.getElementById('blockchain');
+        blockchainContainer.innerHTML = ''; // Clear the blockchain visualization
+
+        blockchain.forEach((block, index) => {
+            const blockElement = document.createElement('div');
+            blockElement.classList.add('block');
+            blockElement.innerHTML = `
+                <div>Block #${index + 1}</div>
+                <div>Previous Hash: ${block.prevHash}</div>
+                <div>Data: ${block.data}</div>
+                <div>Hash: ${block.hash}</div>
+            `;
+            blockchainContainer.appendChild(blockElement);
+        });
+    }
+
+    // Event listener for the blockchain form submission
+    document.getElementById('blockchainForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        const blockData = document.getElementById('blockData').value;
+        const previousBlockHash = blockchain.length === 0 ? '0' : blockchain[blockchain.length - 1].hash;
+        
+        const blockHash = await createBlock(previousBlockHash, blockData);
+        
+        const newBlock = {
+            hash: blockHash,
+            data: blockData,
+            prevHash: previousBlockHash
+        };
+        blockchain.push(newBlock);
+        
+        visualizeBlockchain(); // Update the visual representation of the blockchain
+        
+        document.getElementById('blockData').value = ''; // Clear the input field
+    });
+
+
+
+
 
     </script>
 </body>
