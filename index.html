@@ -134,71 +134,92 @@
         .crypto-ticker li {
             margin: 5px 0;
         }
-        * Blockchain Demo Styling */
         .blockchain-intro {
-            color: #ffffff;
-            margin: 2em 0;
+        color: #c8c8c8; /* Adjust the color to match your site's theme */
+        margin: 2em 0;
+        font-size: 1em; /* Adjust the font size as needed */
         }
 
         .blockchain-demo {
-            margin-top: 2em;
-            background: #2c2c54;
+            background: #333; /* Match the site's section background color */
             padding: 2em;
             border-radius: 8px;
+            color: #c8c8c8; /* Text color */
+            margin-bottom: 2em; /* Spacing after the section */
         }
 
         .blockchain-demo h2 {
-            color: #6cb4ee;
+            color: #6cb4ee; /* Heading color to match the theme */
             margin-bottom: 1em;
         }
 
-        .blockchain-demo .form-input {
-            margin-bottom: 1em;
-        }
-
-        .blockchain-demo .block {
-            background: #f7f7f7;
-            border: 1px solid #333;
+        .blockchain-demo input[type="text"] {
+            padding: 0.5em;
+            border: 1px solid #555; /* Subtle border */
             border-radius: 4px;
-            padding: 10px;
-            margin: 10px 0;
-            position: relative;
-        }
-
-        .blockchain-demo .block:before {
-            content: 'Block';
-            position: absolute;
-            top: -1em;
-            left: 10px;
-            background: #6cb4ee;
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
-        }
-
-        .blockchain-demo .block .data {
-            font-weight: bold;
+            color: #333;
+            margin-right: 0.5em;
         }
 
         .blockchain-demo button {
             background: #6cb4ee;
             color: #fff;
             border: none;
-            padding: 10px 15px;
+            padding: 0.5em 1em;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 1em;
         }
 
         .blockchain-demo button:hover {
-            background-color: #5a9fce;
+            background-color: #5a9fce; /* Darker shade on hover */
         }
 
-        /* Add responsiveness */
+        .blockchain-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Aligns form to the left */
+        }
+
+        .blockchain-demo .block {
+            background: #f7f7f7;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 1em;
+            margin: 1em 0;
+        }
+
+        .blockchain-demo .block:before {
+            content: 'Block';
+            position: absolute;
+            top: -1em;
+            left: 1em;
+            background: #6cb4ee;
+            color: #fff;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        /* Right-align the 'Email me' button */
+        #chatbotButton {
+            position: absolute;
+            right: 20px; /* Distance from the right */
+            top: 20px; /* Distance from the top */
+            z-index: 10;
+        }
+
+
+        /* Adjustments for mobile responsiveness */
         @media (max-width: 768px) {
             .blockchain-demo {
                 padding: 1em;
+            }
+
+            #chatbotButton {
+                position: static; /* On mobile, place it in the normal flow */
+                display: block; /* Ensure it takes its own line */
+                margin: 1em auto; /* Center the button on mobile */
             }
         }
 
