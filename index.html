@@ -5,13 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Company Name</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        header, footer { background: #333; color: #fff; text-align: center; padding: 10px 0; }
-        h1, h2 { color: #333; }
-        p { margin: 15px 0; }
-        .services-section, .contact-section { background: #f4f4f4; padding: 20px 0; }
-        .footer { background: #222; color: #ddd; text-align: center; padding: 10px 0; font-size: 14px; }
+        /* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Font */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Color scheme */
+:root {
+    --primary-color: #0052cc; /* Primary color for your brand */
+    --secondary-color: #e6f2ff; /* Secondary color for backgrounds, etc. */
+    --text-color: #333;
+    --footer-background: #333;
+    --footer-text: #fff;
+}
+
+/* Header styles */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Section styles */
+section {
+    padding: 2rem 0;
+    background-color: var(--secondary-color);
+}
+
+/* Service list */
+.services-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.services-section ul li {
+    background: white;
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 8px;
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--footer-background);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+}
+
+/* Button styles */
+button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Add more styles as needed */
+
     </style>
 </head>
 <body>
