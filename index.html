@@ -3,132 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Company Name</title>
+    <title>Juan Manuel Gómez López - Innovator at the Intersection of Technology and Philosophy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> <!-- Replace with your actual kit code -->
     <style>
-        /* Basic reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Font */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-}
-
-/* Color scheme */
-:root {
-    --primary-color: #0052cc; /* Primary color for your brand */
-    --secondary-color: #e6f2ff; /* Secondary color for backgrounds, etc. */
-    --text-color: #333;
-    --footer-background: #333;
-    --footer-text: #fff;
-}
-
-/* Header styles */
-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-
-/* Section styles */
-section {
-    padding: 2rem 0;
-    background-color: var(--secondary-color);
-}
-
-/* Service list */
-.services-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.services-section ul li {
-    background: white;
-    margin-bottom: 1em;
-    padding: 1em;
-    border-radius: 8px;
-}
-
-/* Footer styles */
-footer {
-    background-color: var(--footer-background);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 1rem;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-    .container {
-        padding: 20px;
-    }
-}
-
-/* Button styles */
-button {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-/* Add more styles as needed */
-
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background: #1b1b2f; color: #c8c8c8; }
+        .container { max-width: 80%; margin: auto; padding: 50px 20px; }
+        header { text-align: center; color: #fff; margin-bottom: 50px; }
+        header h1 { font-size: 2.5em; margin-bottom: 0; }
+        header p { font-size: 1.2em; margin-top: 5px; }
+        .about-me { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
+        .experience { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
+        .education { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
+        .skills { background: #4e4e50; padding: 30px; border-radius: 8px; }
+        .timeline { position: relative; margin-left: 30px; }
+        .timeline::before { content: ''; position: absolute; width: 2px; height: 100%; background: #c8c8c8; left: -15px; top: 0; }
+        .timeline-event { position: relative; padding-bottom: 20px; }
+        .timeline-event:last-child { padding-bottom: 0; }
+        .timeline-icon { position: absolute; left: -33px; background: #1b1b2f; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; }
+        .timeline-icon i { color: #6cb4ee; }
+        h3, h4 { color: #fff; }
+        p, li { color: #c8c8c8; }
+        .skillset { display: flex; flex-wrap: wrap; justify-content: space-between; }
+        .skill { background: #6cb4ee; color: #fff; padding: 10px 20px; border-radius: 20px; margin: 5px; cursor: pointer; }
+        .skill:hover { background-color: #fff; color: #1b1b2f; }
+        .active-skill { background: #fff; color: #1b1b2f; }
+        footer { text-align: center; padding: 20px 0; }
+        footer p { color: #fff; }
+        @media (max-width: 768px) {
+            .container { width: 95%; }
+            .timeline { margin-left: 20px; }
+            .timeline-icon { left: -25px; }
+        }
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+        /* The Close Button */
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-modal:hover,
+        .close-modal:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Welcome to Your Company Name</h1>
-            <p>Expertise in Software Consulting and Development with a Focus on Cloud Computing, CI/CD, Integration, Data, Analytics, and Web3 Technologies.</p>
+            <h1>Juan Manuel Gómez López</h1>
+            <p>A Fusion of Technology and Classical Wisdom</p>
         </div>
     </header>
 
-    <section class="services-section">
-        <div class="container">
-            <h2>Our Services</h2>
-            <ul>
-                <li>Cloud Computing: Optimizing your cloud infrastructure for efficiency and cost reduction.</li>
-                <li>CI/CD: Automating your integration and deployment processes to speed up product launches.</li>
-                <li>Integration and Data: Facilitating system integrations and big data analytics.</li>
-                <li>Analytics: Transforming your data into actionable insights for better business decisions.</li>
-                <li>Web3 Technology: Helping you incorporate the latest blockchain and Web3 technologies into your business.</li>
-            </ul>
+    <div class="container">
+        <div class="about-me">
+            <h2>About Me</h2>
+            <p>An Architect of Software and Strategist in Blockchain Development, weaving over 5 years of tech expertise with timeless philosophical principles. My journey transcends code, exploring the nexus of technology and human thought.</p>
         </div>
-    </section>
 
-    <section class="contact-section">
-        <div class="container">
-            <h2>Why Choose Us?</h2>
-            <p>Proven Expertise: Our team has years of experience in developing advanced technological solutions.</p>
-            <p>Customized Approach: We understand that each business is unique and offer tailored solutions.</p>
-            <p>Continuous Innovation: We keep up with the latest technologies to provide you with the best solutions.</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>For more information about our services or to schedule a consultation, <a href="mailto:your.email@example.com">click here</a> or call us at (555) 123-4567.</p>
-            <div class="footer">
-                Follow Us:
-                <a href="#">LinkedIn</a> |
-                <a href="#">Twitter</a> |
-                <a href="#">GitHub</a>
+        <!-- Repeat for each experience -->
+        <div class="experience">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-event">
+                    <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Solution Architect - XM SA ESP</h3>
+                    <h4>2018 - Present, Medellín, Colombia</h4>
+                    <p>Led 8-person teams on 15+ projects, championing CI/CD and cloud practices to revolutionize efficiency and reliability. <button class="open-modal" data-modal="modalXM">Read More</button></p>
+                    <!-- Modal -->
+                    <div id="modalXM" class="modal">
+                        <div class="modal-content">
+                            <span class="close-modal" data-modal="modalXM">&times;</span>
+                            <h4>Solution Architect - XM SA ESP</h4>
+                            <p>More detailed information about the Solution Architect position...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other experience modals -->
             </div>
         </div>
+
+        <div class="education">
+            <h2>Education</h2>
+            <p>Blending technology with a touch of Renaissance, my academic path traverses from Cloud Computing MicroMasters to the philosophical inquiries of the Ateneo Regina Apostolorum.</p>
+        </div>
+
+        <div class="skills">
+            <h2>Skills</h2>
+            <div class="skillset">
+                <!-- Repeat for each skill -->
+                <div class="skill">Blockchain Technologies</div>
+                <div class="skill">Cloud Computing</div>
+                <div class="skill">DevOps</div>
+                <!-- Other skills -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Connect with me on <a href="https://www.linkedin.com/in/jmgomezl/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | Email me at <a href="mailto:juanmag.lpez@gmail.com">juanmag.lpez@gmail.com</a></p>
     </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Toggle skill pills
+        document.querySelectorAll('.skill').forEach(skill => {
+            skill.addEventListener('click', function () {
+                this.classList.toggle('active-skill');
+            });
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Event listeners for modals
+        window.onload = () => {
+            document.querySelectorAll('.open-modal').forEach(button => {
+                button.onclick = () => openModal(button.dataset.modal);
+            });
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.onclick = () => closeModal(button.dataset.modal);
+            });
+        };
+    </script>
 </body>
 </html>
-
