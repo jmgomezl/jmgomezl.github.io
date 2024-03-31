@@ -233,66 +233,61 @@
     </footer>
 
     <script>
-        // Wait for the DOM to load
         document.addEventListener('DOMContentLoaded', function () {
-            // Function to open a modal
-            function openModal(modalId) {
-                var modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.style.display = 'block';
-                }
+    
+    // Functions to open and close modals, ensuring they are in the global scope
+    window.openModal = function(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'block';
+        }
+    }
+
+    window.closeModal = function(modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Add click event listeners to 'Read More' buttons
+    document.querySelectorAll('.open-modal').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent event from bubbling up
+            var modalId = this.getAttribute('data-modal');
+            openModal(modalId);
+        });
+    });
+
+    // Add click event listeners to 'Close' buttons in modals
+    document.querySelectorAll('.close-modal').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent event from bubbling up
+            var modalId = this.getAttribute('data-modal');
+            closeModal(modalId);
+        });
+    });
+
+    // Close modals when clicking outside of the modal content
+    document.querySelectorAll('.modal').forEach(function (modal) {
+        modal.addEventListener('click', function (event) {
+            if (event.target === modal) { // Checks if the target is the modal itself and not a child
+                closeModal(modal.getAttribute('id'));
             }
+        });
+    });
 
-            // Function to close a modal
-            function closeModal(modalId) {
-                var modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.style.display = 'none';
-                }
-            }
-
-            // Close modals when clicking outside of the modal content
-            window.addEventListener('click', function (event) {
-                if (event.target.classList.contains('modal')) {
-                    event.target.style.display = 'none';
-                }
-            });
-
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
             });
         });
+    });
+});
 
-        // Add click event listeners to 'Read More' buttons
-        document.querySelectorAll('.open-modal').forEach(function (button) {
-            button.addEventListener('click', function (event) {
-                event.stopPropagation();  // Prevent event from bubbling up
-                var modalId = this.getAttribute('data-modal');
-                openModal(modalId);
-            });
-        });
-
-        // Add click event listeners to 'Close' buttons in modals
-        document.querySelectorAll('.close-modal').forEach(function (button) {
-            button.addEventListener('click', function (event) {
-                event.stopPropagation();  // Prevent event from bubbling up
-                var modalId = this.getAttribute('data-modal');
-                closeModal(modalId);
-            });
-        });
-
-        // Stop propagation for click events inside modals to prevent them from closing inadvertently
-        document.querySelectorAll('.modal-content').forEach(function (content) {
-            content.addEventListener('click', function (event) {
-                event.stopPropagation();
-            });
-        });
 
 
     </script>
