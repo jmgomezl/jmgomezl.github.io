@@ -251,22 +251,6 @@
                 }
             }
 
-            // Add click event listeners to 'Read More' buttons
-            document.querySelectorAll('.open-modal').forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var modalId = this.getAttribute('data-modal');
-                    openModal(modalId);
-                });
-            });
-
-            // Add click event listeners to 'Close' buttons in modals
-            document.querySelectorAll('.close-modal').forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var modalId = this.getAttribute('data-modal');
-                    closeModal(modalId);
-                });
-            });
-
             // Close modals when clicking outside of the modal content
             window.addEventListener('click', function (event) {
                 if (event.target.classList.contains('modal')) {
@@ -284,6 +268,32 @@
                 });
             });
         });
+
+        // Add click event listeners to 'Read More' buttons
+        document.querySelectorAll('.open-modal').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.stopPropagation();  // Prevent event from bubbling up
+                var modalId = this.getAttribute('data-modal');
+                openModal(modalId);
+            });
+        });
+
+        // Add click event listeners to 'Close' buttons in modals
+        document.querySelectorAll('.close-modal').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.stopPropagation();  // Prevent event from bubbling up
+                var modalId = this.getAttribute('data-modal');
+                closeModal(modalId);
+            });
+        });
+
+        // Stop propagation for click events inside modals to prevent them from closing inadvertently
+        document.querySelectorAll('.modal-content').forEach(function (content) {
+            content.addEventListener('click', function (event) {
+                event.stopPropagation();
+            });
+        });
+
 
     </script>
 </body>
