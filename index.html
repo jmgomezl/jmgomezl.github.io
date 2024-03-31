@@ -233,45 +233,29 @@
     </footer>
 
     <script>
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Toggle skill pills
-        document.querySelectorAll('.skill').forEach(skill => {
-            skill.addEventListener('click', function () {
-                this.classList.toggle('active-skill');
-            });
-        });
-
-        // Modal functions
-        function openModal(modalId) {
-            var modal = document.getElementById(modalId);
-            modal.style.display = 'block';
-            modal.querySelector('.modal-content').scrollTop = 0; // Scroll to top of the modal content
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
         // Wait for the DOM to load
         document.addEventListener('DOMContentLoaded', function () {
+            // Function to open a modal
+            function openModal(modalId) {
+                var modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'block';
+                }
+            }
+
+            // Function to close a modal
+            function closeModal(modalId) {
+                var modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
             // Add click event listeners to 'Read More' buttons
             document.querySelectorAll('.open-modal').forEach(function (button) {
                 button.addEventListener('click', function () {
                     var modalId = this.getAttribute('data-modal');
-                    var modal = document.getElementById(modalId);
-                    if (modal) {
-                        modal.style.display = 'block';
-                    }
+                    openModal(modalId);
                 });
             });
 
@@ -279,18 +263,25 @@
             document.querySelectorAll('.close-modal').forEach(function (button) {
                 button.addEventListener('click', function () {
                     var modalId = this.getAttribute('data-modal');
-                    var modal = document.getElementById(modalId);
-                    if (modal) {
-                        modal.style.display = 'none';
-                    }
+                    closeModal(modalId);
                 });
             });
 
-            // Optional: Close modals when clicking outside of the modal content
+            // Close modals when clicking outside of the modal content
             window.addEventListener('click', function (event) {
-                if (event.target.className === 'modal') {
+                if (event.target.classList.contains('modal')) {
                     event.target.style.display = 'none';
                 }
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
             });
         });
 
