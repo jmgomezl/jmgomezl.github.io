@@ -262,16 +262,6 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // Event listeners for modals
-        window.onload = () => {
-            document.querySelectorAll('.open-modal').forEach(button => {
-                button.onclick = () => openModal(button.dataset.modal);
-            });
-            document.querySelectorAll('.close-modal').forEach(button => {
-                button.onclick = () => closeModal(button.dataset.modal);
-            });
-        };
-
         // Wait for the DOM to load
         document.addEventListener('DOMContentLoaded', function () {
             // Add click event listeners to 'Read More' buttons
