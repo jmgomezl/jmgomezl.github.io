@@ -263,6 +263,37 @@
                 button.onclick = () => closeModal(button.dataset.modal);
             });
         };
+        // Wait for the DOM to load
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add click event listeners to 'Read More' buttons
+        document.querySelectorAll('.open-modal').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal');
+                var modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Add click event listeners to 'Close' buttons in modals
+        document.querySelectorAll('.close-modal').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var modalId = this.getAttribute('data-modal');
+                var modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Optional: Close modals when clicking outside of the modal content
+        window.addEventListener('click', function (event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        });
+    });
     </script>
 </body>
 </html>
