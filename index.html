@@ -16,14 +16,38 @@
         .experience { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
         .education { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
         .skills { background: #4e4e50; padding: 30px; border-radius: 8px; }
-        .timeline { position: relative; margin-left: 30px; }
-        .timeline::before { content: ''; position: absolute; width: 2px; height: 100%; background: #c8c8c8; left: -15px; top: 0; }
-        .timeline-event { position: relative; padding-bottom: 20px; }
-        .timeline-event:last-child { padding-bottom: 0; }
-        .timeline-icon { position: absolute; left: -33px; background: #1b1b2f; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; }
-        .timeline-icon i { color: #6cb4ee; }
-        h3, h4 { color: #fff; }
-        p, li { color: #c8c8c8; }
+        .timeline-event {
+            background: #2c2c54; /* Slightly lighter background for each event */
+            border-left: 4px solid #6cb4ee; /* Color accent on the left border */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px; /* Adds space between entries */
+            transition: transform 0.2s; /* Smooth transition for hover effect */
+        }
+
+        .timeline-event:hover {
+            transform: translateY(-5px); /* Slight raise effect on hover */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        }
+
+        .timeline-icon {
+            color: #6cb4ee; /* Color for icons */
+        }
+        h3 {
+            font-size: 1.1em; /* Larger font size for job titles */
+            font-weight: 700; /* Bolder font for job titles */
+            margin-bottom: 5px; /* Spacing between title and date/company */
+        }
+
+        h4 {
+            color: #a4acc4; /* Subdued color for date and company */
+        }
+        p {
+            font-size: 0.95em; /* Slightly smaller font for description */
+            line-height: 1.6; /* Improved readability */
+            color: #c8c8c8; /* Lighter text for readability on the dark background */
+        }
+        li { color: #c8c8c8; }
         .skillset { display: flex; flex-wrap: wrap; justify-content: space-between; }
         .skill { background: #6cb4ee; color: #fff; padding: 10px 20px; border-radius: 20px; margin: 5px; cursor: pointer; }
         .skill:hover { background-color: #fff; color: #1b1b2f; }
@@ -68,6 +92,20 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+        .open-modal {
+            background: #6cb4ee; /* Matching your icon color */
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .open-modal:hover {
+            background-color: #5a9fce; /* Darker shade on hover */
+            transform: scale(1.05); /* Slight zoom effect on hover */
         }
     </style>
 </head>
