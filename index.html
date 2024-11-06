@@ -3,535 +3,1308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juan Manuel Gómez López - Innovator at the Intersection of Technology and Philosophy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script> <style>
-        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background: #1b1b2f; color: #c8c8c8; }
-        .container { max-width: 80%; margin: auto; padding: 50px 20px; }
-        header { text-align: center; color: #fff; margin-bottom: 50px; }
-        header h1 { font-size: 2.5em; margin-bottom: 0; }
-        header p { font-size: 1.2em; margin-top: 5px; }
-        .about-me { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
-        .experience { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
-        .education { background: #4e4e50; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
-        .skills { background: #4e4e50; padding: 30px; border-radius: 8px; }
-        .timeline-event {
-            background: #2c2c54; /* Slightly lighter background for each event */
-            border-left: 4px solid #6cb4ee; /* Color accent on the left border */
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px; /* Adds space between entries */
-            transition: transform 0.2s; /* Smooth transition for hover effect */
+    <title>Juan Manuel Gómez López - Innovation & Technology Leader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text: #f8fafc;
+            --text-secondary: #94a3b8;
+            --success: #065f46;
+            --error: #7f1d1d;
+            --whatsapp: #25D366;
         }
 
-        .timeline-event:hover {
-            transform: translateY(-5px); /* Slight raise effect on hover */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-        }
-
-        .timeline-icon {
-            color: #6cb4ee; /* Color for icons */
-        }
-        h3 {
-            font-size: 1.1em; /* Larger font size for job titles */
-            font-weight: 700; /* Bolder font for job titles */
-            margin-bottom: 5px; /* Spacing between title and date/company */
-        }
-
-        h4 {
-            color: #a4acc4; /* Subdued color for date and company */
-        }
-        p {
-            font-size: 0.95em; /* Slightly smaller font for description */
-            line-height: 1.6; /* Improved readability */
-            color: #c8c8c8; /* Lighter text for readability on the dark background */
-        }
-        li { color: #c8c8c8; }
-        .skillset { display: flex; flex-wrap: wrap; justify-content: space-between; }
-        .skill { background: #6cb4ee; color: #fff; padding: 10px 20px; border-radius: 20px; margin: 5px; cursor: pointer; }
-        .skill:hover { background-color: #fff; color: #1b1b2f; }
-        .active-skill { background: #fff; color: #1b1b2f; }
-        footer { text-align: center; padding: 20px 0; }
-        footer p { color: #fff; }
-        @media (max-width: 768px) {
-            .container { width: 95%; }
-                        .timeline { margin-left: 20px; }
-            .timeline-icon { left: -25px; }
-        }
-        /* The Modal (background) */
-        .modal {
-            display: none; 
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            align-items: center; /* Align items vertically */
-            justify-content: center; /* Center content horizontally */
-        }
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 50px auto; /* Increased the top margin */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            overflow-y: auto; /* Ensure there's scrolling for overflow content */
-            max-height: 80vh; /* Maximum height to ensure it doesn't go off screen */
-            position: relative; /* Position relative for the inner content */
-        }
-
-        /* The Close Button */
-        .close-modal {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-modal:hover,
-        .close-modal:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .open-modal {
-            background: #6cb4ee; /* Matching your icon color */
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .open-modal:hover {
-            background-color: #5a9fce; /* Darker shade on hover */
-            transform: scale(1.05); /* Slight zoom effect on hover */
-        }
-        .crypto-ticker {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #333;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            z-index: 100;
-        }
-        .crypto-ticker h3 {
-            margin-bottom: 5px;
-        }
-        .crypto-ticker ul {
-            list-style: none;
-            padding: 0;
+        * {
             margin: 0;
-        }
-        .crypto-ticker li {
-            margin: 5px 0;
-        }
-        .blockchain-intro {
-        color: #c8c8c8; /* Adjust the color to match your site's theme */
-        margin: 2em 0;
-        font-size: 1em; /* Adjust the font size as needed */
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
-        .blockchain-demo {
-            background: #333; /* Match the site's section background color */
-            padding: 2em;
-            border-radius: 8px;
-            color: #c8c8c8; /* Text color */
-            margin-bottom: 2em; /* Spacing after the section */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .blockchain-demo h2 {
-            color: #6cb4ee; /* Heading color to match the theme */
-            margin-bottom: 1em;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
-        .blockchain-demo input[type="text"] {
-            padding: 0.5em;
-            border: 1px solid #555; /* Subtle border */
-            border-radius: 4px;
-            color: #333;
-            margin-right: 0.5em;
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
-        .blockchain-demo button {
-            background: #6cb4ee;
-            color: #fff;
-            border: none;
-            padding: 0.5em 1em;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            font-size: 1em;
-        }
-
-        .blockchain-demo button:hover {
-            background-color: #5a9fce; /* Darker shade on hover */
-        }
-
-        .blockchain-container {
+        .nav-content {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Aligns form to the left */
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .blockchain-demo .block {
-            background: #f7f7f7;
-            border: 1px solid #333;
-            border-radius: 4px;
-            padding: 1em;
-            margin: 1em 0;
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
         }
 
-        .blockchain-demo .block:before {
-            content: 'Block';
-            position: absolute;
-            top: -1em;
-            left: 1em;
-            background: #6cb4ee;
-            color: #fff;
-            padding: 0.2em 0.5em;
-            border-radius: 4px;
-            font-size: 0.8em;
-        }
-        /* Right-align the 'Email me' button */
-        #chatbotButton {
-            position: absolute;
-            right: 20px; /* Distance from the right */
-            top: 20px; /* Distance from the top */
-            z-index: 10;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
         }
 
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
 
-        /* Adjustments for mobile responsiveness */
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 5rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .experience-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: var(--surface);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--background);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-align: center;
+        }
+
+        .button-primary {
+            background: var(--primary);
+            color: var(--text);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--text);
+        }
+
+        .button-whatsapp {
+            background: var(--whatsapp);
+            color: var(--text);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blockchain Game */
+        .game-container {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .game-info {
+            margin-bottom: 2rem;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-feedback {
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+
+        .block-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .block {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            min-width: 250px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .blockchain-demo {
-                padding: 1em;
+            .hero h1 {
+                font-size: 3rem;
             }
 
-            #chatbotButton {
-                position: static; /* On mobile, place it in the normal flow */
-                display: block; /* Ensure it takes its own line */
-                margin: 1em auto; /* Center the button on mobile */
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 4rem 0;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
             }
         }
-
     </style>
 </head>
+
 <body>
-    <header>
-        <div class="container">
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-content">
+            <a href="#" class="nav-brand">JM</a>
+            <div class="nav-links">
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#blockchain" class="nav-link">Blockchain</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
             <h1>Juan Manuel Gómez López</h1>
-            <p>A Fusion of Technology and Classical Wisdom</p>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="about-me">
-            <h2>About Me</h2>
-            <p>An Architect of Software and Strategist in Blockchain Development, weaving over 5 years of tech expertise with timeless philosophical principles. My journey transcends code, exploring the nexus of technology and human thought.</p>
-        </div>
-
-    <div class="container">
-        <div class="blockchain-demo">
-            <div class="blockchain-intro">
-                <p>Explore the basics of blockchain technology with this interactive demonstration. Add blocks to the chain and see how blockchain keeps data secure and immutable.</p>
-            </div>
-            <h2>Interactive Blockchain Demonstration</h2>
-            <form id="blockchainForm">
-                <input class="form-input" type="text" id="blockData" placeholder="Enter data for the new block" required />
-                <button type="submit">Add to Chain</button>
-            </form>
-            <div id="blockchain"></div>
-        </div>
-    </div>
-
-        <div class="experience">
-            <h2>Experience</h2>
-            <div class="timeline">
-                <div class="timeline-event">
-                    <div class="timeline-icon"><i class="fas fa-briefcase"></i></div>
-                    <h3>Solution Architect - XM SA ESP</h3>
-                    <h4>2018 - Present, Medellín, Colombia</h4>
-                    <p>Led 8-person teams on 15+ projects, championing CI/CD and cloud practices to revolutionize efficiency and reliability. <button class="open-modal" data-modal="modalXM">Read More</button></p>
-                    <div id="modalXM" class="modal">
-                        <div class="modal-content">
-                            <span class="close-modal" data-dismiss="modal" data-modal="modalXM">&times;</span>  <h4>Solution Architect - XM SA ESP</h4>
-                            <p>More detailed information about the Solution Architect position...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="timeline-event">
-                    <div class="timeline-icon"><i class="fas fa-code-branch"></i></div>
-                    <h3>Blockchain Architect - WES-IT</h3>
-                    <h4>2022 - 2023, San Juan, Argentina</h4>
-                    <p>Led a government-sponsored R&D project in the mining sector, delivering key insights and solutions. <button class="open-modal" data-modal="modalWES">Read More</button></p>
-                    <div id="modalWES" class="modal">
-                        <div class="modal-content">
-                            <span class="close-modal" data-dismiss="modal" data-modal="modalWES">&times;</span>
-                            <h4>Blockchain Architect - WES - IT</h4>
-                            <p>Detailed information about the Blockchain Architect position, specific projects, and your contributions...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-icon"><i class="fas fa-server"></i></div>
-                    <h3>CTO - Blockchain eX</h3>
-                    <h4>2022 - 2023, Medellín, Colombia</h4>
-                    <p>Oversaw project lifecycles, ensuring code quality and system security. <button class="open-modal" data-modal="modalCTO">Read More</button></p>
-                    <div id="modalCTO" class="modal">
-                        <div class="modal-content">
-                            <span class="close-modal" data-dismiss="modal" data-modal="modalCTO">&times;</span>
-                            <h4>CTO - Blockchain eX</h4>
-                            <p>More detailed information about the CTO role, achievements, and key projects...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-event">
-                    <div class="timeline-icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Chief Blockchain Officer - Unergy</h3>
-                    <h4>2022, Medellín, Colombia</h4>
-                    <p>Guided the strategic transition to Web3 technologies. <button class="open-modal" data-modal="modalCBO">Read More</button></p>
-                    <div id="modalCBO" class="modal">
-                        <div class="modal-content">
-                            <span class="close-modal" data-dismiss="modal" data-modal="modalCBO">&times;</span>
-                            <h4>Chief Blockchain Officer - Unergy</h4>
-                            <p>Insightful information about leading the company's digital transformation and other relevant details...</p>
-                        </div>
-                    </div>
-                </div>
-
+            <p>Innovation Leader at the Intersection of Technology & Philosophy</p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#contact" class="button button-primary">Get in Touch</a>
+                <a href="#experience" class="button button-secondary">View Experience</a>
             </div>
         </div>
+    </section>
 
-        <div class="education">
-            <h2>Education</h2>
-            <p>Blending technology with a touch of Renaissance, my academic path traverses from Cloud Computing MicroMasters to the philosophical inquiries of the Ateneo Regina Apostolorum.</p>
-        </div>
-
-        <div class="skills">
-            <h2>Skills</h2>
-            <div class="skillset">
-                <div class="skill">Blockchain Technologies</div>
-                <div class="skill">Cloud Computing</div>
-                <div class="skill">DevOps</div>
-                <div class="skill">Solidity</div>
-                <div class="skill">Rust</div>
-                <div class="skill">Substrate</div>
-                <div class="skill">Go</div>
-                <div class="skill">Python (Flask/FastAPI)</div>
-                <div class="skill">JavaScript</div>
-                <div class="skill">C/C++</div>
-                <div class="skill">PHP</div>
-                <div class="skill">MySQL</div>
-                <div class="skill">MongoDB</div>
-                <div class="skill">CosmosDB</div>
-                <div class="skill">Azure</div>
-                <div class="skill">AWS</div>
-                <div class="skill">Azure DevOps</div>
-                <div class="skill">CI/CD</div>
-                <div class="skill">Git</div>
-                <div class="skill">Docker</div>
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3>Technical Ambassador</h3>
+                    <p class="company">ICP Colombia | 2024 - Present</p>
+                    <p>Leading developer training and MVP creation initiatives, bridging technology and business objectives.</p>
+                </div>
+                <div class="experience-card">
+                    <h3>Tokenization Leader</h3>
+                    <p class="company">XM | 2018 - 2024</p>
+                    <p>Spearheaded innovative blockchain solutions and led technical architecture development.</p>
+                </div>
+                <div class="experience-card">
+                    <h3>Blockchain Architect</h3>
+                    <p class="company">WES-IT | 2022 - 2023</p>
+                    <p>Led R&D initiatives in blockchain implementation for mining and financial sectors.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
-    
-
-   <!-- Add to the end of your body tag -->
-    <div id="crypto-ticker" class="crypto-ticker">
-        <h3>Cryptocurrency Prices</h3>
-        <ul id="crypto-prices">
-            <!-- Prices will be populated here by the script -->
-        </ul>
-    </div>
-
-    
-    <footer>
-        <p>Connect with me on <a href="https://www.linkedin.com/in/jmgomezl/" target="_blank" rel="noopener noreferrer">LinkedIn</a> | Email me at <a href="mailto:juanmag.lpez@gmail.com">juanmag.l        </p>
-    </footer>
-
-    <!-- Chatbot Button -->
-<button id="chatbotButton" class="open-modal">Email me</button>
-
-<!-- Chatbot Modal -->
-<div id="chatbotModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('chatbotModal')">&times;</span>
-        <h2>Email me</h2>
-        <div id="chatbot">
-            <!-- Chat content will go here -->
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-container">
+                <div class="skill-tag">Blockchain</div>
+                <div class="skill-tag">Solidity</div>
+                <div class="skill-tag">Rust</div>
+                <div class="skill-tag">Python</div>
+                <div class="skill-tag">AWS</div>
+                <div class="skill-tag">Azure</div>
+                <div class="skill-tag">Docker</div>
+                <div class="skill-tag">Kubernetes</div>
+                <div class="skill-tag">Smart Contracts</div>
+                <div class="skill-tag">DeFi</div>
+            </div>
         </div>
-        <input type="text" id="chatInput" placeholder="Ask me anything about blockchain...">
-        <button onclick="sendMessage()">Send</button>
-    </div>
-</div>
+    </section>
 
+    <!-- Blockchain Game Section -->
+    <section id="blockchain" class="section">
+        <div class="container">
+            <h2 class="section-title">Blockchain Explorer & Mining Game</h2>
+            <div class="game-container">
+                <div class="game-info">
+                    <h3>Blockchain Mining Game</h3>
+                    <p>Try to mine blocks by finding the right nonce that creates a hash starting with the target number of zeros.</p>
+                    <div class="stats">
+                        <div>Score: <span id="score">0</span></div>
+                        <div>Difficulty: <span id="difficulty">4</span> zeros</div>
+                        <div>Best Time: <span id="bestTime">--:--</span></div>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <input type="number" id="nonceInput" class="form-input" placeholder="Enter nonce (0-999999)">
+                    <button onclick="checkNonce()" class="button button-primary">Mine Block</button>
+                    <button onclick="startNewGame()" class="button button-secondary">New Game</button>
+                </div>
+                <div class="game-feedback" id="gameFeedback">
+                    Try to mine the block!
+                </div>
+                <div class="block-info">
+                    <div>Previous Hash: <span id="prevHash" class="mono">0000000000000000</span></div>
+                    <div>Data: <span id="blockData" class="mono">Block #1</span></div>
+                    <div>Target: <span id="target" class="mono">Hash must start with 0000</span></div>
+                </div>
+            </div>
+            
+            <div class="blockchain-history">
+                <h3>Blockchain History</h3>
+                <div id="blockchain" class="block-container"></div>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-form">
+                <form id="emailForm" onsubmit="sendEmail(event)">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea id="message" class="form-input" rows="4" required></textarea>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="button button-primary" style="flex: 1">
+                            Send Email
+                        </button>
+                        <a href="https://wa.me/573052282500" target="_blank" class="button button-whatsapp" style="flex: 1">
+                            WhatsApp
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="blockchain" class="section">
+        <div class="container">
+            <h2 class="section-title">Advanced Blockchain Mining Simulator</h2>
+            <div class="game-container">
+                <!-- Game Info Section -->
+                <div class="game-info">
+                    <h3 class="game-title">Welcome to Blockchain Mining!</h3>
+                    <p class="game-description">Mine blocks by finding the right nonce and add your own transaction data.</p>
+                    
+                    <!-- Game Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <label>Blocks Mined</label>
+                            <span id="score">0</span>
+                        </div>
+                        <div class="stat-box">
+                            <label>Difficulty</label>
+                            <span id="difficultyDisplay">4</span>
+                        </div>
+                        <div class="stat-box">
+                            <label>Best Time</label>
+                            <span id="bestTime">--:--</span>
+                        </div>
+                    </div>
     
-    // Functions to open and close modals, ensuring they are in the global scope
-    window.openModal = function(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'block';
+                    <!-- Difficulty Adjustment -->
+                    <div class="difficulty-controls">
+                        <label>Adjust Mining Difficulty</label>
+                        <div class="difficulty-slider-container">
+                            <input 
+                                type="range" 
+                                id="difficultySlider" 
+                                min="1" 
+                                max="6" 
+                                value="4" 
+                                class="difficulty-slider"
+                                oninput="adjustDifficulty(this.value)">
+                            <div class="difficulty-labels">
+                                <span>Easier</span>
+                                <span>Harder</span>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Current Block Info -->
+                    <div class="block-info">
+                        <div class="info-row">
+                            <label>Previous Hash:</label>
+                            <span id="prevHash" class="hash">0000000000000000</span>
+                        </div>
+                        <div class="info-row">
+                            <label>Target:</label>
+                            <span id="target" class="hash">0000</span>
+                        </div>
+                        <div class="info-row">
+                            <label>Block #:</label>
+                            <span id="blockNumber" class="hash">1</span>
+                        </div>
+                    </div>
+    
+                    <!-- Block Metadata Input -->
+                    <div class="metadata-section">
+                        <h4>Block Metadata</h4>
+                        <div class="metadata-inputs">
+                            <div class="metadata-field">
+                                <label>From:</label>
+                                <input type="text" id="fromInput" class="metadata-input" placeholder="Sender address">
+                            </div>
+                            <div class="metadata-field">
+                                <label>To:</label>
+                                <input type="text" id="toInput" class="metadata-input" placeholder="Recipient address">
+                            </div>
+                            <div class="metadata-field">
+                                <label>Amount:</label>
+                                <input type="number" id="amountInput" class="metadata-input" placeholder="Transaction amount" min="0">
+                            </div>
+                            <div class="metadata-field">
+                                <label>Message:</label>
+                                <input type="text" id="messageInput" class="metadata-input" placeholder="Optional message">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Mining Controls -->
+                    <div class="mining-controls">
+                        <input type="number" 
+                               id="nonceInput" 
+                               placeholder="Enter nonce (0-999999)" 
+                               min="0" 
+                               max="999999"
+                               class="nonce-input">
+                        <div class="button-group">
+                            <button id="mineButton" class="game-button primary" onclick="mine()">
+                                Mine Block
+                            </button>
+                            <button id="autoMineButton" class="game-button primary" onclick="toggleAutoMine()">
+                                Start Auto-Mining
+                            </button>
+                            <button id="resetButton" class="game-button secondary" onclick="resetGame()">
+                                Reset Game
+                            </button>
+                        </div>
+                    </div>
+    
+                    <!-- Feedback Display -->
+                    <div id="feedback" class="feedback">Ready to start mining...</div>
+                </div>
+    
+                <!-- Blockchain Display -->
+                <div class="blockchain-display">
+                    <h3>Blockchain</h3>
+                    <div id="blockchainContainer" class="blockchain-container"></div>
+                </div>
+            </div>
+        </div>
+    
+        <style>
+            .game-container {
+                background: var(--surface);
+                padding: 2rem;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                margin-top: 2rem;
+            }
+    
+            .game-title {
+                color: var(--primary);
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+    
+            .game-description {
+                color: var(--text-secondary);
+                margin-bottom: 2rem;
+            }
+    
+            /* Stats Grid */
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+                margin: 2rem 0;
+            }
+    
+            .stat-box {
+                background: var(--background);
+                padding: 1rem;
+                border-radius: 8px;
+                text-align: center;
+            }
+    
+            /* Difficulty Controls */
+            .difficulty-controls {
+                background: var(--background);
+                padding: 1.5rem;
+                border-radius: 8px;
+                margin: 1.5rem 0;
+            }
+    
+            .difficulty-slider-container {
+                margin-top: 1rem;
+            }
+    
+            .difficulty-slider {
+                width: 100%;
+                height: 6px;
+                -webkit-appearance: none;
+                background: var(--surface);
+                border-radius: 3px;
+                outline: none;
+                margin: 1rem 0;
+            }
+    
+            .difficulty-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                background: var(--primary);
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+    
+            .difficulty-slider::-webkit-slider-thumb:hover {
+                transform: scale(1.1);
+            }
+    
+            .difficulty-labels {
+                display: flex;
+                justify-content: space-between;
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+            }
+    
+            /* Metadata Section */
+            .metadata-section {
+                background: var(--background);
+                padding: 1.5rem;
+                border-radius: 8px;
+                margin: 1.5rem 0;
+            }
+    
+            .metadata-section h4 {
+                color: var(--primary);
+                margin-bottom: 1rem;
+            }
+    
+            .metadata-inputs {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+    
+            .metadata-field {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+    
+            .metadata-input {
+                padding: 0.8rem;
+                border: 1px solid var(--primary);
+                background: var(--surface);
+                color: var(--text);
+                border-radius: 6px;
+                width: 100%;
+            }
+    
+            .game-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .game-button.primary {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .game-button.secondary {
+        background: var(--surface);
+        color: var(--text);
+        border: 2px solid var(--primary);
+    }
+
+    .game-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-button:active {
+        transform: translateY(1px);
+    }
+
+    .game-button.mining {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
+        animation: pulseButton 1.5s infinite;
+    }
+
+    @keyframes pulseButton {
+        0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+    }
+
+    .button-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .nonce-input {
+        width: 100%;
+        padding: 16px 20px;
+        font-size: 1.1rem;
+        font-family: 'Inter', monospace;
+        background: var(--background);
+        color: var(--text);
+        border: 2px solid var(--primary);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nonce-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        transform: translateY(-1px);
+    }
+
+    .nonce-input::placeholder {
+        color: var(--text-secondary);
+        opacity: 0.7;
+    }
+
+    .nonce-input::-webkit-inner-spin-button,
+    .nonce-input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .nonce-input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .input-wrapper {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .input-wrapper::after {
+        content: 'NONCE';
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        background: var(--surface);
+        padding: 0 8px;
+        font-size: 0.8rem;
+        color: var(--primary);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 768px) {
+        .button-group {
+            grid-template-columns: 1fr;
+        }
+        
+        .game-button {
+            width: 100%;
+            padding: 16px;
+        }
+
+        .metadata-inputs {
+                    grid-template-columns: 1fr;
+                }
+        }
+
+        </style>
+
+<script>
+    // Game state management
+    let gameState = {
+        blockNumber: 1,
+        prevHash: "0".repeat(16),
+        difficulty: 4,
+        score: 0,
+        bestTime: Infinity,
+        startTime: Date.now(),
+        isAutoMining: false,
+        autoMineInterval: null
+    };
+
+    // Metadata structure
+    class BlockMetadata {
+        constructor(from, to, amount, message, timestamp) {
+            this.from = from;
+            this.to = to;
+            this.amount = amount;
+            this.message = message;
+            this.timestamp = timestamp;
+        }
+
+        toString() {
+            return JSON.stringify(this);
         }
     }
 
-    window.closeModal = function(modalId) {
-        var modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'none';
+    // SHA-256 hash function
+    async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Difficulty adjustment
+    function adjustDifficulty(value) {
+        gameState.difficulty = parseInt(value);
+        document.getElementById('difficultyDisplay').textContent = value;
+        document.getElementById('target').textContent = "0".repeat(value);
+        
+        // Update feedback
+        const feedback = document.getElementById('feedback');
+        feedback.className = 'feedback';
+        feedback.textContent = `Difficulty adjusted to ${value} leading zeros`;
+    }
+
+    // Get current block metadata
+    function getBlockMetadata() {
+        return new BlockMetadata(
+            document.getElementById('fromInput').value || 'Anonymous',
+            document.getElementById('toInput').value || 'Anonymous',
+            document.getElementById('amountInput').value || '0',
+            document.getElementById('messageInput').value || 'No message',
+            Date.now()
+        );
+    }
+
+    // Core mining function
+    async function mine() {
+        const nonce = document.getElementById('nonceInput').value;
+        if (!nonce) return;
+
+        const metadata = getBlockMetadata();
+        const blockData = {
+            number: gameState.blockNumber,
+            metadata: metadata,
+            timestamp: Date.now()
+        };
+
+        const message = `${gameState.prevHash}${JSON.stringify(blockData)}${nonce}`;
+        const hash = await sha256(message);
+        
+        const feedback = document.getElementById('feedback');
+        
+        // Check if hash meets difficulty requirement
+        if (hash.startsWith("0".repeat(gameState.difficulty))) {
+            // Successful mine
+            handleSuccessfulMine(hash, nonce, blockData);
+        } else {
+            // Failed attempt
+            handleFailedMine(hash);
         }
     }
 
-    // Add click event listeners to 'Read More' buttons
-    document.querySelectorAll('.open-modal').forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            event.stopPropagation(); // Prevent event from bubbling up
-            var modalId = this.getAttribute('data-modal');
-            openModal(modalId);
-        });
-    });
+    // Handle successful mining
+    function handleSuccessfulMine(hash, nonce, blockData) {
+        const feedback = document.getElementById('feedback');
+        feedback.className = 'feedback success';
+        feedback.textContent = `Block mined! Hash: ${hash}`;
+        
+        // Update game state
+        gameState.score++;
+        const timeTaken = ((Date.now() - gameState.startTime) / 1000).toFixed(2);
+        if (timeTaken < gameState.bestTime) {
+            gameState.bestTime = timeTaken;
+        }
 
-    // Add click event listeners to 'Close' buttons in modals
-    document.querySelectorAll('.close-modal').forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            event.stopPropagation(); // Prevent event from bubbling up
-            var modalId = this.getAttribute('data-modal');
-            closeModal(modalId);
-        });
-    });
+        // Add block to chain
+        addBlock(blockData, nonce, hash);
+        
+        // Prepare next block
+        gameState.blockNumber++;
+        gameState.prevHash = hash.substring(0, 16);
+        
+        // Update UI
+        updateStats();
+        updateBlockInfo();
+        document.getElementById('nonceInput').value = '';
+        clearMetadataInputs();
+        
+        // Stop auto-mining if active
+        if (gameState.isAutoMining) {
+            stopAutoMining();
+        }
 
-    // Close modals when clicking outside of the modal content
-    document.querySelectorAll('.modal').forEach(function (modal) {
-        modal.addEventListener('click', function (event) {
-            if (event.target === modal) { // Checks if the target is the modal itself and not a child
-                closeModal(modal.getAttribute('id'));
+        // Add celebration effect
+        addCelebrationEffect();
+    }
+
+    // Clear metadata inputs
+    function clearMetadataInputs() {
+        document.getElementById('fromInput').value = '';
+        document.getElementById('toInput').value = '';
+        document.getElementById('amountInput').value = '';
+        document.getElementById('messageInput').value = '';
+    }
+
+    // Handle failed mining attempt
+    function handleFailedMine(hash) {
+        const feedback = document.getElementById('feedback');
+        feedback.className = 'feedback error';
+        feedback.textContent = `Invalid hash: ${hash}`;
+    }
+
+    // Auto mining controls
+    function toggleAutoMine() {
+        if (gameState.isAutoMining) {
+            stopAutoMining();
+        } else {
+            startAutoMining();
+        }
+    }
+
+    function startAutoMining() {
+        // If metadata is empty, generate random metadata
+        if (!document.getElementById('fromInput').value) {
+            generateRandomMetadata();
+        }
+
+        gameState.isAutoMining = true;
+        const button = document.getElementById('autoMineButton');
+        button.textContent = 'Stop Auto-Mining';
+        button.classList.add('mining');
+        
+        gameState.autoMineInterval = setInterval(async () => {
+            const randomNonce = Math.floor(Math.random() * 1000000);
+            document.getElementById('nonceInput').value = randomNonce;
+            await mine();
+        }, 100);
+    }
+
+    function generateRandomMetadata() {
+        const addresses = ['Alice', 'Bob', 'Charlie', 'Dave', 'Eve'];
+        document.getElementById('fromInput').value = addresses[Math.floor(Math.random() * addresses.length)];
+        document.getElementById('toInput').value = addresses[Math.floor(Math.random() * addresses.length)];
+        document.getElementById('amountInput').value = Math.floor(Math.random() * 100);
+        document.getElementById('messageInput').value = 'Auto-generated transaction';
+    }
+
+    function stopAutoMining() {
+        gameState.isAutoMining = false;
+        clearInterval(gameState.autoMineInterval);
+        const button = document.getElementById('autoMineButton');
+        button.textContent = 'Start Auto-Mining';
+        button.classList.remove('mining');
+    }
+
+    // UI update functions
+    function updateStats() {
+        document.getElementById('score').textContent = gameState.score;
+        document.getElementById('difficultyDisplay').textContent = gameState.difficulty;
+        document.getElementById('bestTime').textContent = 
+            gameState.bestTime === Infinity ? '--:--' : `${gameState.bestTime}s`;
+        document.getElementById('blockNumber').textContent = gameState.blockNumber;
+    }
+
+    function updateBlockInfo() {
+        document.getElementById('prevHash').textContent = gameState.prevHash;
+        document.getElementById('target').textContent = "0".repeat(gameState.difficulty);
+    }
+
+    function addBlock(blockData, nonce, hash) {
+        const blockElement = document.createElement('div');
+        blockElement.className = 'block';
+        blockElement.innerHTML = `
+            <div style="color: var(--primary); margin-bottom: 0.5rem;">Block #${blockData.number}</div>
+            <div style="color: var(--text-secondary);">Nonce: ${nonce}</div>
+            <div style="color: var(--text-secondary);">From: ${blockData.metadata.from}</div>
+            <div style="color: var(--text-secondary);">To: ${blockData.metadata.to}</div>
+            <div style="color: var(--text-secondary);">Amount: ${blockData.metadata.amount}</div>
+            <div style="color: var(--text-secondary);">Message: ${blockData.metadata.message}</div>
+            <div style="color: var(--text-secondary); word-break: break-all;">
+                Hash: ${hash.substring(0, 16)}...
+            </div>
+        `;
+        
+        const container = document.getElementById('blockchainContainer');
+        container.appendChild(blockElement);
+        blockElement.scrollIntoView({ behavior: 'smooth', inline: 'end' });
+    }
+
+    // Visual effects
+    function addCelebrationEffect() {
+        const gameContainer = document.querySelector('.game-container');
+        gameContainer.style.animation = 'none';
+        gameContainer.offsetHeight; // Trigger reflow
+        gameContainer.style.animation = 'pulse 0.5s ease';
+    }
+
+    // Game reset
+    function resetGame() {
+        // Reset game state
+        gameState = {
+            blockNumber: 1,
+            prevHash: "0".repeat(16),
+            difficulty: parseInt(document.getElementById('difficultySlider').value),
+            score: 0,
+            bestTime: Infinity,
+            startTime: Date.now(),
+            isAutoMining: false
+        };
+        
+        // Stop auto-mining if active
+        if (gameState.autoMineInterval) {
+            stopAutoMining();
+        }
+        
+        // Clear UI
+        document.getElementById('blockchainContainer').innerHTML = '';
+        document.getElementById('nonceInput').value = '';
+        clearMetadataInputs();
+        
+        // Reset feedback
+        const feedback = document.getElementById('feedback');
+        feedback.className = 'feedback';
+        feedback.textContent = 'Ready to mine...';
+        
+        // Update displays
+        updateStats();
+        updateBlockInfo();
+    }
+
+    // Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize game
+        resetGame();
+        
+        // Add event listener for Enter key
+        document.getElementById('nonceInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                mine();
             }
         });
-    });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        // Add event listener for input validation
+        document.getElementById('nonceInput').addEventListener('input', (e) => {
+            const value = e.target.value;
+            if (value < 0) e.target.value = 0;
+            if (value > 999999) e.target.value = 999999;
+        });
+
+        // Initialize difficulty slider
+        document.getElementById('difficultySlider').value = gameState.difficulty;
+    });
+</script>
+</section>
+
+    <!-- Footer -->
+    <footer style="background: var(--surface); padding: 2rem 0; margin-top: 4rem;">
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2024 Juan Manuel Gómez López. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Particles.js Configuration
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#2563eb"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#2563eb",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // Blockchain Game Logic
+        let currentBlock = {
+            number: 1,
+            prevHash: "0".repeat(16),
+            data: "Block #1",
+            targetZeros: 4,
+            timestamp: Date.now()
+        };
+
+        let gameStats = {
+            score: 0,
+            bestTime: Infinity,
+            startTime: Date.now()
+        };
+
+        async function sha256(message) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(message);
+            return crypto.subtle.digest('SHA-256', data)
+                .then(hash => {
+                    return Array.from(new Uint8Array(hash))
+                        .map(b => b.toString(16).padStart(2, '0'))
+                        .join('');
+                });
+        }
+
+        function startNewGame() {
+            currentBlock.number = 1;
+            currentBlock.prevHash = "0".repeat(16);
+            currentBlock.data = `Block #${currentBlock.number}`;
+            currentBlock.timestamp = Date.now();
+            gameStats.score = 0;
+            gameStats.startTime = Date.now();
+            
+            updateUI();
+            document.getElementById('gameFeedback').className = 'game-feedback';
+            document.getElementById('gameFeedback').textContent = 'Try to mine the block!';
+            document.getElementById('blockchain').innerHTML = '';
+            document.getElementById('score').textContent = gameStats.score;
+        }
+
+        async function checkNonce() {
+            const nonce = document.getElementById('nonceInput').value;
+            if (!nonce) return;
+
+            const message = `${currentBlock.prevHash}${currentBlock.data}${nonce}${currentBlock.timestamp}`;
+            const hash = await sha256(message);
+            
+            const targetZeros = "0".repeat(currentBlock.targetZeros);
+            const feedback = document.getElementById('gameFeedback');
+            
+            if (hash.startsWith(targetZeros)) {
+                gameStats.score++;
+                const timeTaken = ((Date.now() - gameStats.startTime) / 1000).toFixed(2);
+                if (timeTaken < gameStats.bestTime) {
+                    gameStats.bestTime = timeTaken;
+                    document.getElementById('bestTime').textContent = `${timeTaken}s`;
+                }
+                
+                feedback.className = 'game-feedback success';
+                feedback.textContent = `Block mined! Hash: ${hash}`;
+                
+                addBlockToChain(currentBlock, hash, nonce);
+                
+                currentBlock.number++;
+                currentBlock.prevHash = hash.substring(0, 16);
+                currentBlock.data = `Block #${currentBlock.number}`;
+                currentBlock.timestamp = Date.now();
+                
+                updateUI();
+                document.getElementById('score').textContent = gameStats.score;
+            } else {
+                feedback.className = 'game-feedback error';
+                feedback.textContent = `Invalid hash: ${hash}`;
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('prevHash').textContent = currentBlock.prevHash;
+            document.getElementById('blockData').textContent = currentBlock.data;
+            document.getElementById('target').textContent = 
+                `Hash must start with ${"0".repeat(currentBlock.targetZeros)}`;
+            document.getElementById('nonceInput').value = '';
+        }
+
+        function addBlockToChain(block, hash, nonce) {
+            const blockElement = document.createElement('div');
+            blockElement.className = 'block';
+            blockElement.innerHTML = `
+                <div>Block #${block.number}</div>
+                <div>Nonce: ${nonce}</div>
+                <div>Hash: ${hash.substring(0, 16)}...</div>
+            `;
+            document.getElementById('blockchain').appendChild(blockElement);
+        }
+
+        // Email Form Handler
+        function sendEmail(e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const mailtoBody = encodeURIComponent(
+                `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+            );
+            
+            const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+            
+            window.location.href = `mailto:juanmag.lpez@gmail.com?subject=${subject}&body=${mailtoBody}`;
+            
+            document.getElementById('emailForm').reset();
+        }
+
+        // Initialize game when page loads
+        document.addEventListener('DOMContentLoaded', startNewGame);
+
+        // Allow Enter key for nonce input
+        document.getElementById('nonceInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                checkNonce();
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd')
-        .then(response => response.json())
-        .then(data => {
-            const btcPrice = data.bitcoin.usd;
-            const ethPrice = data.ethereum.usd;
-            document.getElementById('crypto-prices').innerHTML = `
-                <li>Bitcoin: $${btcPrice}</li>
-                <li>Ethereum: $${ethPrice}</li>
-            `;
-        })
-        .catch(err => console.error(err));
-});
-
-// Inside your script tag after DOMContentLoaded
-document.getElementById('chatbotButton').addEventListener('click', function() {
-    openModal('chatbotModal');
-});
-
-function sendMessage() {
-    var input = document.getElementById('chatInput');
-    // Process the message here and update the chatbot content
-    // For demonstration, we'll just echo the input
-    var chat = document.getElementById('chatbot');
-    chat.innerHTML += `<p>You: ${input.value}</p>`;
-    chat.innerHTML += `<p>AI Bot: Let me think about that...</p>`;
-    input.value = ''; // Clear the input after sending
-}
-
-// Make sure to include functionality to handle sending messages when pressing the Enter key
-document.getElementById('chatInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-let blockchain = [];
-
-    // Function to hash block data
-    async function hashBlockData(data) {
-        const encoder = new TextEncoder();
-        const dataBuffer = encoder.encode(data);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-    }
-
-    // Function to create a new block in the blockchain
-    async function createBlock(previousHash, blockData) {
-        const blockContents = JSON.stringify({ data: blockData, prevHash: previousHash });
-        return await hashBlockData(blockContents);
-    }
-
-    // Visualize the blockchain on the page
-    function visualizeBlockchain() {
-        const blockchainContainer = document.getElementById('blockchain');
-        blockchainContainer.innerHTML = ''; // Clear the blockchain visualization
-
-        blockchain.forEach((block, index) => {
-            const blockElement = document.createElement('div');
-            blockElement.classList.add('block');
-            blockElement.innerHTML = `
-                <div>Block #${index + 1}</div>
-                <div>Previous Hash: ${block.prevHash}</div>
-                <div>Data: ${block.data}</div>
-                <div>Hash: ${block.hash}</div>
-            `;
-            blockchainContainer.appendChild(blockElement);
-        });
-    }
-
-    // Event listener for the blockchain form submission
-    document.getElementById('blockchainForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        
-        const blockData = document.getElementById('blockData').value;
-        const previousBlockHash = blockchain.length === 0 ? '0' : blockchain[blockchain.length - 1].hash;
-        
-        const blockHash = await createBlock(previousBlockHash, blockData);
-        
-        const newBlock = {
-            hash: blockHash,
-            data: blockData,
-            prevHash: previousBlockHash
-        };
-        blockchain.push(newBlock);
-        
-        visualizeBlockchain(); // Update the visual representation of the blockchain
-        
-        document.getElementById('blockData').value = ''; // Clear the input field
-    });
-
-
-
-
-
     </script>
 </body>
 </html>
-
-
-
