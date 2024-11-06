@@ -441,36 +441,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <div class="contact-form">
-                <form id="emailForm" onsubmit="sendEmail(event)">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" id="name" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="email" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea id="message" class="form-input" rows="4" required></textarea>
-                    </div>
-                    <div style="display: flex; gap: 1rem;">
-                        <button type="submit" class="button button-primary" style="flex: 1">
-                            Send Email
-                        </button>
-                        <a href="https://wa.me/573052282500" target="_blank" class="button button-whatsapp" style="flex: 1">
-                            WhatsApp
-                        </a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
 
     <section id="blockchain" class="section">
         <div class="container">
@@ -1101,6 +1071,37 @@
         document.getElementById('difficultySlider').value = gameState.difficulty;
     });
 </script>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="contact-form">
+            <form id="emailForm" onsubmit="sendEmail(event)">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="message" class="form-input" rows="4" required></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="button button-primary" style="flex: 1">
+                        Send Email
+                    </button>
+                    <a href="https://wa.me/573052282500" target="_blank" class="button button-whatsapp" style="flex: 1">
+                        WhatsApp
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
 </section>
 
     <!-- Footer -->
