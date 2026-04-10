@@ -521,17 +521,7 @@
                 <div class="terminal-dot g"></div>
                 <span class="terminal-title">identity.json</span>
             </div>
-            <div class="terminal-body">
-                <span class="prompt">$</span> <span class="cmd">cat identity.json</span><br>
-                {<br>
-                &nbsp;&nbsp;<span class="key">"name"</span>: <span class="value">"Juan Manuel Gomez Lopez"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"role"</span>: <span class="value">"Lead Solutions Architect"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"company"</span>: <span class="value">"Toeshee (Web3 CX)"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"ambassador"</span>: <span class="value">"Hedera &mdash; Colombia"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"location"</span>: <span class="value">"Medell&iacute;n, Colombia"</span>,<br>
-                &nbsp;&nbsp;<span class="key">"interests"</span>: [<span class="value">"cypherpunk"</span>, <span class="value">"DLT"</span>, <span class="value">"privacy"</span>, <span class="value">"decentralization"</span>]<br>
-                }<span class="cursor"></span>
-            </div>
+            <div class="terminal-body" id="terminal-output"><span class="cursor"></span></div>
         </div>
     </div>
 </section>
@@ -756,6 +746,126 @@
     }, { threshold: 0.15 });
 
     els.forEach(el => observer.observe(el));
+})();
+
+// Terminal typing animation with typos and corrections
+(function() {
+    const output = document.getElementById('terminal-output');
+    const cursor = output.querySelector('.cursor');
+
+    // Each step: { text, class, delay?, typo? }
+    // typo: { wrong, pause } — types wrong chars, pauses, backspaces, then types correct
+    const lines = [
+        { text: '$ ', cls: 'prompt' },
+        { text: 'cat identity.json', cls: 'cmd' },
+        { text: '\n', cls: '' },
+        { text: '{', cls: '' },
+        { text: '\n  ', cls: '' },
+        { text: '"name"', cls: 'key' },
+        { text: ': ', cls: '' },
+        { text: '"Juan Manuel Gomez Lopez"', cls: 'value' },
+        { text: ',', cls: '' },
+        { text: '\n  ', cls: '' },
+        { text: '"role"', cls: 'key' },
+        { text: ': ', cls: '' },
+        { text: '"Lead Solutions Architect"', cls: 'value', typo: { wrong: '"Lead Solutins', correct: '"Lead Solutions Architect"', pause: 400 } },
+        { text: ',', cls: '' },
+        { text: '\n  ', cls: '' },
+        { text: '"company"', cls: 'key' },
+        { text: ': ', cls: '' },
+        { text: '"Toeshee (Web3 CX)"', cls: 'value' },
+        { text: ',', cls: '' },
+        { text: '\n  ', cls: '' },
+        { text: '"ambassador"', cls: 'key' },
+        { text: ': ', cls: '' },
+        { text: '"Hedera \u2014 Colombia"', cls: 'value' },
+        { text: ',', cls: '' },
+        { text: '\n  ', cls: '' },
+        { text: '"location"', cls: 'key' },
+        { text: ': ', cls: '' },
+        { text: '"Medell\u00edn, Colombia"', cls: 'value', typo: { wrong: '"Medellin', correct: '"Medell\u00edn, Colombia"', pause: 350 } },
+        { text: ',', cls: '' },
+        { text: '\n  ', cls: '' },
+        { text: '"interests"', cls: 'key' },
+        { text: ': [', cls: '' },
+        { text: '"cypherpunk"', cls: 'value' },
+        { text: ', ', cls: '' },
+        { text: '"DLT"', cls: 'value' },
+        { text: ', ', cls: '' },
+        { text: '"privacy"', cls: 'value' },
+        { text: ', ', cls: '' },
+        { text: '"decentralization"', cls: 'value' },
+        { text: ']', cls: '' },
+        { text: '\n', cls: '' },
+        { text: '}', cls: '' },
+    ];
+
+    let currentSpan = null;
+    const baseSpeed = 18;
+    const fastSpeed = 8;
+
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    function createSpan(cls) {
+        const span = document.createElement('span');
+        if (cls) span.className = cls;
+        output.insertBefore(span, cursor);
+        return span;
+    }
+
+    async function typeText(span, text, speed) {
+        for (const ch of text) {
+            if (ch === '\n') {
+                output.insertBefore(document.createElement('br'), cursor);
+            } else {
+                span.textContent += ch;
+            }
+            await sleep(speed + Math.random() * speed * 0.4);
+        }
+    }
+
+    async function backspace(span, count) {
+        for (let i = 0; i < count; i++) {
+            span.textContent = span.textContent.slice(0, -1);
+            await sleep(35);
+        }
+    }
+
+    async function run() {
+        await sleep(600);
+
+        for (const line of lines) {
+            const span = createSpan(line.cls);
+
+            if (line.typo) {
+                // Type the wrong version
+                await typeText(span, line.typo.wrong, baseSpeed);
+                await sleep(line.typo.pause);
+                // Backspace the wrong part
+                await backspace(span, line.typo.wrong.length);
+                await sleep(200);
+                // Type the correct version
+                await typeText(span, line.typo.correct, fastSpeed);
+            } else {
+                const speed = line.cls === 'cmd' ? fastSpeed : baseSpeed;
+                await typeText(span, line.text, speed);
+            }
+
+            // Small pause between segments
+            if (line.text.endsWith(',') || line.text === '{') {
+                await sleep(120);
+            }
+        }
+
+        // Done typing — cursor keeps blinking
+    }
+
+    // Start on page load — terminal is always in the hero
+    if (document.readyState === 'complete') {
+        run();
+    } else {
+        window.addEventListener('load', run);
+    }
 })();
 
 // Smooth scroll
