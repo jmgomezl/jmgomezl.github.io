@@ -213,18 +213,14 @@
         }
 
         /* Hero layout */
-        .hero-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .hero-text { flex: 1; }
+        .hero-top { }
+        .hero-text { }
 
         .avatar-wrap {
-            flex-shrink: 0;
-            position: relative;
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 50;
         }
 
         .avatar {
@@ -243,11 +239,8 @@
         }
 
         @media (max-width: 640px) {
-            .hero-top {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-            .avatar { width: 96px; height: 96px; }
+            .avatar { width: 80px; height: 80px; }
+            .avatar-wrap { bottom: 1rem; right: 1rem; }
         }
 
         /* Sections */
