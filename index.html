@@ -755,123 +755,310 @@
     els.forEach(el => observer.observe(el));
 })();
 
-// Terminal typing animation with typos and corrections
+// === LIVING TERMINAL — never stops ===
 (function() {
     const output = document.getElementById('terminal-output');
     const cursor = output.querySelector('.cursor');
-
-    // Each step: { text, class, delay?, typo? }
-    // typo: { wrong, pause } — types wrong chars, pauses, backspaces, then types correct
-    const lines = [
-        { text: '$ ', cls: 'prompt' },
-        { text: 'cat identity.json', cls: 'cmd' },
-        { text: '\n', cls: '' },
-        { text: '{', cls: '' },
-        { text: '\n  ', cls: '' },
-        { text: '"name"', cls: 'key' },
-        { text: ': ', cls: '' },
-        { text: '"Juan Manuel Gomez Lopez"', cls: 'value' },
-        { text: ',', cls: '' },
-        { text: '\n  ', cls: '' },
-        { text: '"role"', cls: 'key' },
-        { text: ': ', cls: '' },
-        { text: '"Lead Solutions Architect"', cls: 'value', typo: { wrong: '"Lead Solutins', correct: '"Lead Solutions Architect"', pause: 400 } },
-        { text: ',', cls: '' },
-        { text: '\n  ', cls: '' },
-        { text: '"company"', cls: 'key' },
-        { text: ': ', cls: '' },
-        { text: '"Toeshee (Web3 CX)"', cls: 'value' },
-        { text: ',', cls: '' },
-        { text: '\n  ', cls: '' },
-        { text: '"ambassador"', cls: 'key' },
-        { text: ': ', cls: '' },
-        { text: '"Hedera \u2014 Colombia"', cls: 'value' },
-        { text: ',', cls: '' },
-        { text: '\n  ', cls: '' },
-        { text: '"location"', cls: 'key' },
-        { text: ': ', cls: '' },
-        { text: '"Medell\u00edn, Colombia"', cls: 'value', typo: { wrong: '"Medellin', correct: '"Medell\u00edn, Colombia"', pause: 350 } },
-        { text: ',', cls: '' },
-        { text: '\n  ', cls: '' },
-        { text: '"interests"', cls: 'key' },
-        { text: ': [', cls: '' },
-        { text: '"agentic AI"', cls: 'value' },
-        { text: ', ', cls: '' },
-        { text: '"cypherpunk"', cls: 'value' },
-        { text: ', ', cls: '' },
-        { text: '"DLT"', cls: 'value' },
-        { text: ', ', cls: '' },
-        { text: '"decentralization"', cls: 'value' },
-        { text: ']', cls: '' },
-        { text: '\n', cls: '' },
-        { text: '}', cls: '' },
-    ];
-
-    let currentSpan = null;
-    const baseSpeed = 18;
-    const fastSpeed = 8;
+    const glitchChars = '\u2588\u2591\u2592\u2593\u00a7\u00b6\u2020\u2021\u03b1\u03b2\u03b3\u03b4\u03c0\u03a3\u039b\u03a9\u2206\u2200\u2203\u2227\u2228\u00ac\u2261\u2248\u221e';
+    const hexChars = '0123456789abcdef';
 
     function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function randGlitch(len) { return Array.from({length: len}, () => glitchChars[randInt(0, glitchChars.length-1)]).join(''); }
+    function randHex(len) { return Array.from({length: len}, () => hexChars[randInt(0, 15)]).join(''); }
 
-    function createSpan(cls) {
-        const span = document.createElement('span');
-        if (cls) span.className = cls;
-        output.insertBefore(span, cursor);
-        return span;
+    function clearOutput() {
+        while (output.firstChild !== cursor) output.removeChild(output.firstChild);
     }
 
-    async function typeText(span, text, speed) {
+    function addSpan(cls, text) {
+        const s = document.createElement('span');
+        if (cls) s.className = cls;
+        s.textContent = text || '';
+        output.insertBefore(s, cursor);
+        return s;
+    }
+
+    function addBr() { output.insertBefore(document.createElement('br'), cursor); }
+
+    async function typeChar(span, ch, speed) {
+        span.textContent += ch;
+        await sleep(speed + Math.random() * speed * 0.3);
+    }
+
+    async function type(span, text, speed) {
         for (const ch of text) {
-            if (ch === '\n') {
-                output.insertBefore(document.createElement('br'), cursor);
-            } else {
-                span.textContent += ch;
+            if (ch === '\n') addBr();
+            else await typeChar(span, ch, speed);
+        }
+    }
+
+    async function typeWithGlitch(span, text, speed) {
+        // Each char appears as random glitch chars first, then resolves
+        for (const ch of text) {
+            if (ch === '\n') { addBr(); continue; }
+            const flickers = randInt(2, 4);
+            for (let i = 0; i < flickers; i++) {
+                span.textContent += glitchChars[randInt(0, glitchChars.length-1)];
+                await sleep(30);
+                span.textContent = span.textContent.slice(0, -1);
             }
-            await sleep(speed + Math.random() * speed * 0.4);
+            await typeChar(span, ch, speed);
+        }
+    }
+
+    async function decrypt(span, finalText, speed) {
+        // Fill with random chars, then resolve left-to-right
+        let current = Array.from({length: finalText.length}, () => glitchChars[randInt(0, glitchChars.length-1)]);
+        span.textContent = current.join('');
+        await sleep(100);
+
+        for (let i = 0; i < finalText.length; i++) {
+            // Scramble remaining chars a few times
+            for (let j = 0; j < 3; j++) {
+                for (let k = i; k < current.length; k++) {
+                    current[k] = glitchChars[randInt(0, glitchChars.length-1)];
+                }
+                span.textContent = current.join('');
+                await sleep(25);
+            }
+            current[i] = finalText[i];
+            span.textContent = current.join('');
+            await sleep(speed);
         }
     }
 
     async function backspace(span, count) {
         for (let i = 0; i < count; i++) {
             span.textContent = span.textContent.slice(0, -1);
-            await sleep(35);
+            await sleep(25);
         }
     }
 
-    async function run() {
-        await sleep(600);
+    // Glitch effect on existing value spans
+    async function glitchValue(span) {
+        const original = span.textContent;
+        const len = original.length;
+        // Scramble
+        for (let i = 0; i < 6; i++) {
+            span.textContent = randGlitch(len);
+            await sleep(50);
+        }
+        // Resolve back
+        let current = randGlitch(len).split('');
+        for (let i = 0; i < len; i++) {
+            current[i] = original[i];
+            span.textContent = current.join('');
+            await sleep(15);
+        }
+    }
 
-        for (const line of lines) {
-            const span = createSpan(line.cls);
+    // ====== SEQUENCES ======
 
-            if (line.typo) {
-                // Type the wrong version
-                await typeText(span, line.typo.wrong, baseSpeed);
-                await sleep(line.typo.pause);
-                // Backspace the wrong part
-                await backspace(span, line.typo.wrong.length);
+    const commands = [
+        // Sequence 1: cat identity.json with typos
+        async function catIdentity() {
+            const s = addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'cat identity.json', 10);
+            addBr();
+
+            await type(addSpan(''), '{', 18);
+            addBr();
+
+            const fields = [
+                { key: '"name"', val: '"Juan Manuel Gomez Lopez"' },
+                { key: '"role"', val: '"Lead Solutions Architect"', typo: '"Lead Solutins' },
+                { key: '"company"', val: '"Toeshee (Web3 CX)"' },
+                { key: '"ambassador"', val: '"Hedera \u2014 Colombia"' },
+                { key: '"location"', val: '"Medell\u00edn, Colombia"', typo: '"Medellin' },
+                { key: '"interests"', val: '["agentic AI", "cypherpunk", "DLT", "decentralization"]', decrypt: true },
+            ];
+
+            for (let i = 0; i < fields.length; i++) {
+                const f = fields[i];
+                addSpan('', '  ');
+                await type(addSpan('key'), f.key, 16);
+                await type(addSpan(''), ': ', 16);
+
+                const valSpan = addSpan('value');
+
+                if (f.typo) {
+                    await type(valSpan, f.typo, 18);
+                    await sleep(350);
+                    await backspace(valSpan, f.typo.length);
+                    await sleep(150);
+                    await type(valSpan, f.val, 10);
+                } else if (f.decrypt) {
+                    await decrypt(valSpan, f.val, 12);
+                } else {
+                    await typeWithGlitch(valSpan, f.val, 14);
+                }
+
+                if (i < fields.length - 1) await type(addSpan(''), ',', 18);
+                addBr();
+                await sleep(80);
+            }
+
+            await type(addSpan(''), '}', 18);
+        },
+
+        // Sequence 2: gpg verify
+        async function gpgVerify() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'gpg --verify identity.sig', 8);
+            addBr();
+            await sleep(300);
+
+            const lines = [
+                { text: 'gpg: Signature made 2026-04-10T00:00:00', cls: 'comment' },
+                { text: 'gpg: using RSA key 0x' + randHex(16).toUpperCase(), cls: 'comment' },
+                { text: 'gpg: Good signature from "jmgomezl"', cls: 'value' },
+            ];
+
+            for (const l of lines) {
+                const s = addSpan(l.cls);
+                await decrypt(s, l.text, 8);
+                addBr();
                 await sleep(200);
-                // Type the correct version
-                await typeText(span, line.typo.correct, fastSpeed);
-            } else {
-                const speed = line.cls === 'cmd' ? fastSpeed : baseSpeed;
-                await typeText(span, line.text, speed);
+            }
+        },
+
+        // Sequence 3: hashcat / sha256
+        async function hashCheck() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'echo "jmgomezl" | sha256sum', 8);
+            addBr();
+            await sleep(200);
+
+            const hash = randHex(64);
+            const hashSpan = addSpan('value');
+            await decrypt(hashSpan, hash, 4);
+            addSpan('comment', '  -');
+            addBr();
+        },
+
+        // Sequence 4: ping the blockchain
+        async function netScan() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'hedera-cli network status', 8);
+            addBr();
+            await sleep(400);
+
+            const nodes = [
+                'node-mainnet-0.hedera.com  ... \u2705 ACTIVE',
+                'node-mainnet-1.hedera.com  ... \u2705 ACTIVE',
+                'node-mainnet-2.hedera.com  ... \u2705 ACTIVE',
+            ];
+
+            for (const n of nodes) {
+                const s = addSpan('comment');
+                await type(s, n, 6);
+                addBr();
+                await sleep(150);
             }
 
-            // Small pause between segments
-            if (line.text.endsWith(',') || line.text === '{') {
-                await sleep(120);
-            }
-        }
+            addBr();
+            const s = addSpan('value');
+            await type(s, 'Consensus round: #' + randInt(800000000, 999999999), 6);
+            addBr();
+        },
 
-        // Done typing — cursor keeps blinking
+        // Sequence 5: agent status
+        async function agentStatus() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'agent-kit status --verbose', 8);
+            addBr();
+            await sleep(300);
+
+            const items = [
+                { text: '[agent] Initializing Hedera Agent Kit v2.1...', cls: 'comment' },
+                { text: '[agent] Loading LLM orchestrator...', cls: 'comment' },
+                { text: '[agent] Connecting to HCS topic 0.0.' + randInt(100000, 999999) + '...', cls: 'comment' },
+                { text: '[agent] \u2705 Ready. Autonomous mode: ON', cls: 'value' },
+            ];
+
+            for (const item of items) {
+                const s = addSpan(item.cls);
+                await decrypt(s, item.text, 6);
+                addBr();
+                await sleep(250);
+            }
+        },
+
+        // Sequence 6: philosophical fragment
+        async function philosophyFragment() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'fortune philosophy', 8);
+            addBr();
+            await sleep(400);
+
+            const quotes = [
+                '"The unexamined life is not worth living." \u2014 Socrates',
+                '"We are what we repeatedly do." \u2014 Aristotle',
+                '"The soul never thinks without a picture." \u2014 Aristotle',
+                '"No man is free who is not master of himself." \u2014 Epictetus',
+                '"Waste no time arguing what a good man should be. Be one." \u2014 Marcus Aurelius',
+                '"The only true wisdom is knowing you know nothing." \u2014 Socrates',
+                '"Reality is merely an illusion, albeit a very persistent one." \u2014 Plato (attr.)',
+            ];
+
+            const q = pick(quotes);
+            const s = addSpan('value');
+            await type(s, q, 20);
+            addBr();
+        },
+    ];
+
+    // ====== AMBIENT GLITCH on existing values ======
+    async function ambientGlitch() {
+        const valueSpans = output.querySelectorAll('.value');
+        if (valueSpans.length === 0) return;
+        const target = pick([...valueSpans]);
+        await glitchValue(target);
     }
 
-    // Start on page load — terminal is always in the hero
+    // ====== MAIN LOOP ======
+    async function mainLoop() {
+        await sleep(400);
+
+        while (true) {
+            // Phase 1: Run cat identity.json
+            clearOutput();
+            await commands[0]();
+
+            // Phase 2: Ambient glitches on the JSON for a while
+            for (let i = 0; i < randInt(4, 7); i++) {
+                await sleep(randInt(1500, 3500));
+                await ambientGlitch();
+            }
+
+            // Phase 3: Clear and run 2-3 random other commands
+            const extraCmds = [1, 2, 3, 4, 5].sort(() => Math.random() - 0.5).slice(0, randInt(2, 3));
+
+            for (const idx of extraCmds) {
+                await sleep(randInt(800, 1500));
+                clearOutput();
+                await commands[idx]();
+                // Let it sit for a moment
+                await sleep(randInt(2500, 4000));
+
+                // Random ambient glitch on values
+                if (Math.random() > 0.4) {
+                    await ambientGlitch();
+                    await sleep(randInt(1000, 2000));
+                }
+            }
+
+            // Pause before looping back to identity.json
+            await sleep(randInt(1500, 2500));
+        }
+    }
+
     if (document.readyState === 'complete') {
-        run();
+        mainLoop();
     } else {
-        window.addEventListener('load', run);
+        window.addEventListener('load', mainLoop);
     }
 })();
 
