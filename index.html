@@ -1353,7 +1353,7 @@
     // Base positions (center of eye sockets — moved up)
     const eyeLBase = { x: 12, y: 6 };
     const eyeRBase = { x: 19, y: 6 };
-    const maxShift = 1; // max 1 pixel shift in SVG coords
+    const maxShift = 2; // max 2 pixel shift in SVG coords — more noticeable
 
     let targetLX = eyeLBase.x, targetLY = eyeLBase.y;
     let targetRX = eyeRBase.x, targetRY = eyeRBase.y;
@@ -1377,8 +1377,8 @@
         const factor = Math.min(dist / maxDist, 1) * maxShift;
         const angle = Math.atan2(dy, dx);
 
-        const shiftX = Math.round(Math.cos(angle) * factor);
-        const shiftY = Math.round(Math.sin(angle) * factor * 0.5); // less vertical range
+        const shiftX = Math.cos(angle) * factor;
+        const shiftY = Math.sin(angle) * factor * 0.7;
 
         targetLX = eyeLBase.x + shiftX;
         targetLY = eyeLBase.y + shiftY;
@@ -1386,26 +1386,41 @@
         targetRY = eyeRBase.y + shiftY;
     });
 
+    // Also track on touch devices
+    document.addEventListener('touchmove', (e) => {
+        if (!svg || blinking || !e.touches[0]) return;
+        const touch = e.touches[0];
+        const rect = svg.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height * 0.3;
+        const dx = touch.clientX - centerX;
+        const dy = touch.clientY - centerY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const factor = Math.min(dist / 400, 1) * maxShift;
+        const angle = Math.atan2(dy, dx);
+        const shiftX = Math.cos(angle) * factor;
+        const shiftY = Math.sin(angle) * factor * 0.7;
+        targetLX = eyeLBase.x + shiftX;
+        targetLY = eyeLBase.y + shiftY;
+        targetRX = eyeRBase.x + shiftX;
+        targetRY = eyeRBase.y + shiftY;
+    });
+
     function updateEyes() {
-        // Smooth lerp
-        currentLX += (targetLX - currentLX) * 0.3;
-        currentLY += (targetLY - currentLY) * 0.3;
-        currentRX += (targetRX - currentRX) * 0.3;
-        currentRY += (targetRY - currentRY) * 0.3;
+        // Smooth lerp — fluid sub-pixel movement
+        currentLX += (targetLX - currentLX) * 0.12;
+        currentLY += (targetLY - currentLY) * 0.12;
+        currentRX += (targetRX - currentRX) * 0.12;
+        currentRY += (targetRY - currentRY) * 0.12;
 
-        const lx = Math.round(currentLX);
-        const ly = Math.round(currentLY);
-        const rx = Math.round(currentRX);
-        const ry = Math.round(currentRY);
-
-        eyeL.setAttribute('x', lx);
-        eyeL.setAttribute('y', ly);
-        eyeR.setAttribute('x', rx);
-        eyeR.setAttribute('y', ry);
-        shineL.setAttribute('x', lx);
-        shineL.setAttribute('y', ly);
-        shineR.setAttribute('x', rx);
-        shineR.setAttribute('y', ry);
+        eyeL.setAttribute('x', currentLX.toFixed(2));
+        eyeL.setAttribute('y', currentLY.toFixed(2));
+        eyeR.setAttribute('x', currentRX.toFixed(2));
+        eyeR.setAttribute('y', currentRY.toFixed(2));
+        shineL.setAttribute('x', currentLX.toFixed(2));
+        shineL.setAttribute('y', currentLY.toFixed(2));
+        shineR.setAttribute('x', currentRX.toFixed(2));
+        shineR.setAttribute('y', currentRY.toFixed(2));
 
         requestAnimationFrame(updateEyes);
     }
