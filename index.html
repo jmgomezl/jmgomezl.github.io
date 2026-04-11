@@ -1162,6 +1162,139 @@
             await type(s, q, 20);
             addBr();
         },
+
+        // Sequence 7: FastAPI server
+        async function fastapiServer() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'python main.py', 8);
+            addBr();
+            await sleep(300);
+
+            const lines = [
+                { text: 'from fastapi import FastAPI', cls: 'value' },
+                { text: 'from langchain_core.runnables import RunnablePassthrough', cls: 'comment' },
+                { text: '', cls: '' },
+                { text: 'app = FastAPI(title="toeshee-agent-api")', cls: 'value' },
+                { text: '', cls: '' },
+                { text: '@app.post("/agent/execute")', cls: 'key' },
+                { text: 'async def run_agent(prompt: str):', cls: 'value' },
+                { text: '    graph = build_langgraph_agent()', cls: 'comment' },
+                { text: '    return await graph.ainvoke({"input": prompt})', cls: 'comment' },
+            ];
+
+            for (const l of lines) {
+                if (l.text === '') { addBr(); continue; }
+                const s = addSpan(l.cls);
+                await type(s, l.text, 8);
+                addBr();
+                await sleep(60);
+            }
+
+            addBr();
+            const s = addSpan('value');
+            await decrypt(s, 'INFO:     Uvicorn running on http://0.0.0.0:8000', 6);
+            addBr();
+            const s2 = addSpan('value');
+            await type(s2, 'INFO:     Application startup complete. \u2705', 6);
+            addBr();
+        },
+
+        // Sequence 8: Zero-knowledge proof verification
+        async function zkProof() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'zk-verify --circuit carbon_credit.r1cs', 8);
+            addBr();
+            await sleep(400);
+
+            const steps = [
+                { text: '[zk] Loading arithmetic circuit...', cls: 'comment' },
+                { text: '[zk] Constraints: 2,847,391', cls: 'comment' },
+                { text: '[zk] Generating witness from private inputs...', cls: 'comment' },
+                { text: '[zk] Computing Groth16 proof...', cls: 'comment' },
+            ];
+
+            for (const step of steps) {
+                const s = addSpan(step.cls);
+                await decrypt(s, step.text, 5);
+                addBr();
+                await sleep(200);
+            }
+
+            await sleep(300);
+            addBr();
+            const proof = addSpan('key');
+            await type(proof, 'proof: 0x' + randHex(32) + '...', 6);
+            addBr();
+            const verify = addSpan('value');
+            await type(verify, '[zk] \u2705 Proof verified. Carbon credit valid.', 8);
+            addBr();
+        },
+
+        // Sequence 9: Carbon credit tokenization
+        async function carbonTokenize() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'hedera-cli token create --type carbon-credit', 8);
+            addBr();
+            await sleep(300);
+
+            const items = [
+                { text: 'Token: CarbonCredit_COL_2026', cls: 'value' },
+                { text: 'Standard: Verra VCS', cls: 'comment' },
+                { text: 'Vintage: 2026-Q1', cls: 'comment' },
+                { text: 'Supply: 10,000 tCO2e', cls: 'comment' },
+                { text: 'Network: Hedera Mainnet', cls: 'comment' },
+                { text: 'Token ID: 0.0.' + randInt(1000000, 9999999), cls: 'value' },
+            ];
+
+            for (const item of items) {
+                const s = addSpan(item.cls);
+                await decrypt(s, item.text, 7);
+                addBr();
+                await sleep(150);
+            }
+
+            addBr();
+            const tx = addSpan('value');
+            await type(tx, '\u2705 Token minted. Tx: 0x' + randHex(16) + '...', 6);
+            addBr();
+        },
+
+        // Sequence 10: LangGraph agent workflow
+        async function langgraphWorkflow() {
+            addSpan('prompt', '$ ');
+            await type(addSpan('cmd'), 'langgraph run --agent cx-orchestrator', 8);
+            addBr();
+            await sleep(300);
+
+            const nodes = [
+                { text: '[graph] Building agent state machine...', cls: 'comment' },
+                { text: '[graph] Nodes: [classifier, retriever, responder, escalator]', cls: 'key' },
+                { text: '[graph] Edges: classifier \u2192 retriever \u2192 responder', cls: 'key' },
+                { text: '[graph]         classifier \u2192 escalator (if confidence < 0.7)', cls: 'key' },
+                { text: '[graph] Compiling graph with checkpointer...', cls: 'comment' },
+            ];
+
+            for (const n of nodes) {
+                const s = addSpan(n.cls);
+                await type(s, n.text, 6);
+                addBr();
+                await sleep(120);
+            }
+
+            await sleep(400);
+            const status = addSpan('value');
+            await decrypt(status, '[graph] \u2705 Agent compiled. Awaiting CX events...', 6);
+            addBr();
+
+            await sleep(300);
+            addBr();
+            const event = addSpan('comment');
+            await type(event, '[event] Incoming: "How do I stake HBAR?"', 8);
+            addBr();
+            const route = addSpan('value');
+            await type(route, '[graph] classifier \u2192 retriever \u2192 responder (0.94 conf)', 6);
+            addBr();
+        },
     ];
 
     // ====== AMBIENT GLITCH on existing values ======
@@ -1188,7 +1321,7 @@
             }
 
             // Phase 3: Clear and run 2-3 random other commands
-            const extraCmds = [1, 2, 3, 4, 5].sort(() => Math.random() - 0.5).slice(0, randInt(2, 3));
+            const extraCmds = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5).slice(0, randInt(2, 3));
 
             for (const idx of extraCmds) {
                 await sleep(randInt(800, 1500));
