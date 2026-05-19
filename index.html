@@ -220,7 +220,7 @@
             position: fixed;
             bottom: 1.5rem;
             right: 1.5rem;
-            z-index: 50;
+            z-index: 200;
         }
 
         .avatar {
@@ -535,6 +535,7 @@
             <a href="#about">about</a>
             <a href="#experience">exp</a>
             <a href="#skills">skills</a>
+            <a href="#open-source">oss</a>
             <a href="#thoughts">thoughts</a>
             <a href="#contact">contact</a>
         </div>
@@ -783,6 +784,57 @@
                     <li>AI + Web3 Integration</li>
                     <li>Computational Intelligence</li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Open Source -->
+<section id="open-source" class="fade-in">
+    <div class="container">
+        <div class="section-label">// open_source</div>
+        <h2 class="section-title">HAK plugins</h2>
+        <p style="color: var(--text-dim); margin-bottom: 2rem; font-size: 0.9rem;">Five production plugins extending the <a href="https://github.com/hashgraph/hedera-agent-kit-js" target="_blank" rel="noopener" style="color: var(--cyan); text-decoration: none;">Hedera Agent Kit</a> &mdash; on-chain intelligence, DeFi execution, and cross-chain routing from natural language.</p>
+        <div class="interests-grid">
+            <div class="interest-card">
+                <h4>&gt; hak-saucerswap-plugin</h4>
+                <p>DEX integration: swaps, liquidity management, and yield farming positions on SaucerSwap &mdash; the leading DEX on Hedera.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <a href="https://www.npmjs.com/package/hak-saucerswap-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); text-decoration: none; border: 1px solid var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; npm</a>
+                    <a href="https://github.com/jmgomezl/hak-saucerswap-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--cyan); text-decoration: none; border: 1px solid #00a8cc; padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; src</a>
+                </div>
+            </div>
+            <div class="interest-card">
+                <h4>&gt; hak-pyth-plugin</h4>
+                <p>Oracle integration: real-time and historical price feeds for any asset via the Pyth Network price oracle.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <a href="https://www.npmjs.com/package/hak-pyth-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); text-decoration: none; border: 1px solid var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; npm</a>
+                    <a href="https://github.com/jmgomezl/hak-pyth-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--cyan); text-decoration: none; border: 1px solid #00a8cc; padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; src</a>
+                </div>
+            </div>
+            <div class="interest-card">
+                <h4>&gt; hak-stader-plugin</h4>
+                <p>Liquid staking: stake HBAR via Stader to receive HBARX &mdash; earning yield while staying liquid across the Hedera ecosystem.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <a href="https://www.npmjs.com/package/hak-stader-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); text-decoration: none; border: 1px solid var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; npm</a>
+                    <a href="https://github.com/jmgomezl/hak-stader-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--cyan); text-decoration: none; border: 1px solid #00a8cc; padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; src</a>
+                </div>
+            </div>
+            <div class="interest-card">
+                <h4>&gt; hak-layerzero-plugin</h4>
+                <p>Cross-chain bridge: GMP messaging and OFT token transfers between Hedera and 150+ EVM chains via LayerZero V2.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <a href="https://www.npmjs.com/package/hak-layerzero-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); text-decoration: none; border: 1px solid var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; npm</a>
+                    <a href="https://github.com/jmgomezl/hak-layerzero-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--cyan); text-decoration: none; border: 1px solid #00a8cc; padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; src</a>
+                </div>
+            </div>
+            <div class="interest-card">
+                <h4>&gt; hak-axelar-plugin</h4>
+                <p>Cross-chain bridge: ITS token transfers and GMP messaging across 60+ chains via Axelar Amplifier from Hedera.</p>
+                <div style="margin-top: 1rem; display: flex; gap: 0.6rem; flex-wrap: wrap;">
+                    <a href="https://www.npmjs.com/package/hak-axelar-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--green); text-decoration: none; border: 1px solid var(--green-dim); padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; npm</a>
+                    <a href="https://github.com/jmgomezl/hak-axelar-plugin" target="_blank" rel="noopener" style="font-family: var(--mono); font-size: 0.72rem; color: var(--cyan); text-decoration: none; border: 1px solid #00a8cc; padding: 0.2rem 0.6rem; border-radius: 3px;">&gt; src</a>
+                </div>
             </div>
         </div>
     </div>
